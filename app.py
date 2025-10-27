@@ -24,8 +24,7 @@ SELECT * FROM beverages
 CROSS JOIN food_items
 """
 
-
-solution = duckdb.sql(answer).df()
+tab1, tab2, tab3 = st.tabs(["Cat", "Dog", "Owl"])
 
 with st.sidebar:
     option = st.selectbox(
@@ -40,17 +39,14 @@ st.header("enter your code")
 query = st.text_area(label="votre code SQL ici", key="user_input")
 if query:
     result = duckdb.sql(query).df()
+    st.write(f"Vous avez entré la query suivante : {query}")
     st.dataframe(result)
 
 tab2, tab3 = st.tabs(["Tables", "Solution"])
 
 with tab2:
-    st.write("table: beverages")
-    st.dataframe(beverages)
-    st.write("table: food_items")
-    st.dataframe(food_items)
-    st.write("expected:")
-    st.dataframe(solution)
+    st.header("A dog")
+    st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
 
 with tab3:
     st.write(answer)
