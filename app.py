@@ -18,19 +18,18 @@ cookie juice,2.5
 chocolatine,2
 muffin,3
 '''
-food_items = pd.read_csv(io.StringIO(csv2))
 
 answer = """
 SELECT * FROM beverages
 CROSS JOIN food_items
 """
 
-solution = duckdb.sql(answer).df()
+food_items = pd.read_csv(io.StringIO(csv2))
 
+solution = duckdb.sql(answer).df()
 
 st.header("enter your code")
 query = st.text_area(label="votre code SQL ici", key="user_input")
-
 if query:
     result = duckdb.sql(query).df()
     st.dataframe(result)
