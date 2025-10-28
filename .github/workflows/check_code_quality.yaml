@@ -1,0 +1,15 @@
+name: check_code_quality # nom du pipeline
+on: pull_request # on veut qu'elle se déclenche quand il y a une pull request
+jobs: # on lui donne une série de jobs
+  black: # le 1er job c'est black
+    runs-on: ubuntu-22.04.5 # il faut une machine pour que black tourne
+    steps: # voici les étapes
+      - uses: actions/checkout@v3 # il faut utiliser l'action qui consiste à checker le repo
+      - uses: actions/setup-python@v4 # il faut utiliser l'action qui consiste à mettre du python sur la machine ubuntu
+        with:
+          python-version: 3.10 # avec une version python 3.10
+      - run: | # run ces 2 lignes bash (le pipe sert à faire du multi-lignes)
+          python -m pip install --upgrade pip
+          pip install black
+      - run: | # ici on dit qu'il faut lancer black
+          black --check --verbose .
