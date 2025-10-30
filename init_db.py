@@ -2,7 +2,9 @@ import io
 import duckdb
 import pandas as pd
 
-con = duckdb.connect(database="data/exercises_sql_tables.duckdb", read_only=False)  # connexion à une database
+con = duckdb.connect(
+    database="data/exercises_sql_tables.duckdb", read_only=False
+)  # connexion à une database
 
 # ------------------------------------------------
 # EXERCISES LIST
@@ -12,7 +14,7 @@ data = {
     "theme": ["cross_joins", "window functions"],
     "exercise_name": ["beverages_and_food", "simple window"],
     "tables": [["beverages", "food_items"], "simple window"],
-    "last_reviewed": ["1970-01-01", "1970-01-01"]
+    "last_reviewed": ["1970-01-01", "1970-01-01"],
 }
 memory_state_df = pd.DataFrame(data)
 con.execute("CREATE TABLE IF NOT EXISTS memory_state AS SELECT * FROM memory_state_df")
