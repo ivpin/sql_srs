@@ -44,22 +44,24 @@ con.execute("CREATE TABLE IF NOT EXISTS food_items AS SELECT * FROM food_items")
 # ------------------------------------------------
 # OTHER EXERCISES # déclaration de la data
 # ------------------------------------------------
-sizes = """
+size = """
 size
 XS
 M
 L
 XL
 """
-size = pd.read_csv(io.StringIO(sizes))
-con.execute("CREATE TABLE IF NOT EXISTS sizes AS SELECT * FROM size")
+sizes = pd.read_csv(io.StringIO(size))
+con.execute("CREATE TABLE IF NOT EXISTS sizes AS SELECT * FROM sizes")
 
-trademarks = """
+trademark = """
 trademark
 Nike
 Asphalte
 Abercrombie
 Lewis
 """
-trademark = pd.read_csv(io.StringIO(trademarks))
-con.execute("CREATE TABLE IF NOT EXISTS trademarks AS SELECT * FROM trademark")
+trademarks = pd.read_csv(io.StringIO(trademark))
+con.execute("CREATE TABLE IF NOT EXISTS trademarks AS SELECT * FROM trademarks")
+
+con.close()
