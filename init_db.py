@@ -11,10 +11,10 @@ con = duckdb.connect(
 # ------------------------------------------------
 
 data = {
-    "theme": ["cross_joins", "window functions"],
-    "exercise_name": ["beverages_and_food", "simple window"],
-    "tables": [["beverages", "food_items"], "simple window"],
-    "last_reviewed": ["1970-01-01", "1970-01-01"],
+    "theme": ["cross_joins", "cross_joins"],
+    "exercise_name": ["beverages_and_food", "sizes_and_trademarks"],
+    "tables": [["beverages", "food_items"], ["sizes", "trademarks"]],
+    "last_reviewed": ["1980-01-01", "1970-01-01"],
 }
 memory_state_df = pd.DataFrame(data)
 con.execute("CREATE TABLE IF NOT EXISTS memory_state AS SELECT * FROM memory_state_df")
@@ -40,3 +40,26 @@ muffin,3
 """
 food_items = pd.read_csv(io.StringIO(CSV2))
 con.execute("CREATE TABLE IF NOT EXISTS food_items AS SELECT * FROM food_items")
+
+# ------------------------------------------------
+# OTHER EXERCISES # déclaration de la data
+# ------------------------------------------------
+sizes = """
+size
+XS
+M
+L
+XL
+"""
+size = pd.read_csv(io.StringIO(sizes))
+con.execute("CREATE TABLE IF NOT EXISTS sizes AS SELECT * FROM size")
+
+trademarks = """
+trademark
+Nike
+Asphalte
+Abercrombie
+Lewis
+"""
+trademark = pd.read_csv(io.StringIO(trademarks))
+con.execute("CREATE TABLE IF NOT EXISTS trademarks AS SELECT * FROM trademark")
