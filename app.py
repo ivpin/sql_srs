@@ -4,6 +4,17 @@ import os
 import logging
 import duckdb
 import streamlit as st
+import subprocess
+
+if "data" not in os.listdir():
+    print("creating folder data")
+    logging.error(os.listdir())
+    logging.error("creating folder data")
+    os.mkdir("data")
+
+if "exercises_sql_tables.duckdb" not in os.listdir("data"):
+    exec(open("init_db.py").read())
+    # subprocess.run(["sys.executable", "init_db.py"])
 
 
 con = duckdb.connect(
@@ -20,10 +31,6 @@ with st.sidebar:
     )
     st.write("You selected:", theme)
 
-    if theme is None:
-        st.warning("Please select a theme")
-        st.stop()
-
     exercise = (
         con.execute(f"SELECT * FROM memory_state WHERE theme = '{theme}'")
         .df()
@@ -31,10 +38,6 @@ with st.sidebar:
         .reset_index()
     )
     st.write(exercise)
-
-    if exercise.empty:
-        st.warning("No exercise found for this theme")
-        st.stop()
 
     exercise_name = exercise.loc[0, "exercise_name"]
     with open(f"answers/{exercise_name}.sql", "r") as f:
